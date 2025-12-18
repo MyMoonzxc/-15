@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<locale.h>
+#include<string.h>
+
+int main() {
+    setlocale(LC_ALL, "RUS");
+    int a[50][50];
+    int i, j, n, m;
+
+    printf("Введите количество строк: ");  
+    scanf("%d", &n);
+    printf("Введите количество столбцов: ");
+    scanf("%d", &m);
+    if (!(n < 50) || !(m < 50)) return;
+
+    // Ввод элементов массива
+    for (i = 0; i < n; i++) 
+    {
+        for (j = 0; j < m; j++) {
+            printf(" a[%d][%d] = ", i, j);
+            scanf("\n%d", &a[i][j]);
+            printf("Сумма элементов равна:%d\n", i + j);
+        }
+    }
+
+    // Вывод элементов массива 
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 0; j < m; j++) 
+        {
+            printf("a[%d][%d] = %d\n", i, j, a[i][j]); 
+        }
+        printf("\n");
+    }
+
+    //  Вывод в виде таблицы с индексами
+    printf("\n\nТаблица массива с индексами:\n");
+
+   
+    printf("      ");
+    for (j = 0; j < m; j++) {
+        printf(" [%d]  ", j);
+    }
+    printf("\n");
+
+    //  таблица
+    for (i = 0; i < n; i++) {
+        printf("[%d] ", i);  
+        for (j = 0; j < m; j++) {
+            printf("%5d ", a[i][j]);  
+        }
+        printf("\n");
+    }
+
+    //  вывод элемента в правом верхнем углу
+    printf("\n\nЭлемент в правом верхнем углу массива:\n");
+    printf("a[0][%d] = %d\n", m - 1, a[0][m - 1]);
+
+    // поиск минимального элемента в заданной строке
+    printf("\n\nПоиск минимального элемента в заданной строке:\n");
+
+    int minimum;
+    printf("Введите номер строки (от 0 до %d): ", n - 1);
+    scanf("%d", &minimum);
+
+    if (minimum >= 0 && minimum < n) {
+        int min = a[minimum][0]; 
+        int min_col = 0; 
+
+       
+        for (j = 1; j < m; j++) {
+            if (a[minimum][j] < min) {
+                min = a[minimum][j];
+                min_col = j;
+            }
+        }
+
+        printf("Минимальный элемент в строке %d:\n", minimum);
+        printf("a[%d][%d] = %d\n", minimum, min_col, min);
+
+        
+        printf("Строка %d: ", minimum);
+        for (j = 0; j < m; j++) {
+            printf("%d ", a[minimum][j]);
+        }
+        printf("\n");
+    }
+    else {
+        printf("Ошибка: номер строки должен быть от 0 до %d\n", n - 1);
+    }
+
+    return 0;
+}    
