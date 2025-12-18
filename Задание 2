@@ -1,0 +1,177 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include<locale.h>
+#include<stdio.h>
+#include<string.h>
+
+
+//2.2 Вычисление количества ненулевых элементов первой строки массива
+int nenyle(int f[7][7])
+{
+    int nenyl = 0;
+    for (int j = 0; j < 7; j++)
+    {
+        if (f[0][j] != 0)
+        {
+            nenyl = nenyl + 1;
+        }
+    }
+    return nenyl;
+}
+
+//2.3 Вычисление количества пар одинаковых соседних элементов в строке
+int odin(int f[7][7], int nomer, int j)
+{
+    int chis = f[nomer][j];
+    int kol = 0;
+    for (j = 0; j < 7; j++)
+    {
+        if (f[nomer][j] == f[nomer][j + 1])
+        {
+            kol = kol + 1;
+            }
+    }
+    return kol;
+}
+
+//2.4 Координаты максимального элемента.
+int maximum(int a[7][7], int i, int j)
+{
+    int max = a[i][0];
+    int max_col = 0;
+    int k = 0;
+    int d = 0;
+    for (i = 0; i < 7; i++)
+    {
+        
+        for (j = 0; j < 7; j++)
+        {
+            
+        }
+    }
+    if (a[i][j] > max)
+    {
+        max_col = a[i][j];
+        k = i;
+        d = j;
+    }
+    return k, d;
+}
+
+
+
+int main()
+{
+    setlocale(LC_CTYPE, "RUS");
+    int a[7][7];
+    int i, j, p, nomer;
+
+    // Ввод элементов массива
+    puts("Ввод элементов массива");
+    for (i = 0; i < 7; i++)
+    {
+        for (j = 0; j < 7; j++)
+        {
+            printf(" a[%d][%d] = ", i, j);
+            scanf("\n%d", &a[i][j]);
+            if ((a[i][j] < -10) || (a[i][j] > 10))
+            {
+                printf("Массив превышает допустимое значение");
+                return;
+            }
+        }
+    }
+    // Вывод элементов массива 
+    for (int i = 0; i < 7; i++)
+    {
+        for (int j = 0; j < 7; j++)
+        {
+            printf("a[%d][%d] = %d\n", i, j, a[i][j]);
+        }
+        printf("\n");
+    }
+    //  Вывод в виде таблицы с индексами
+    printf("\n\nТаблица массива с индексами:\n");
+
+
+
+    for (j = 0; j < 7; j++)
+    {
+        printf("   [%d]", j);
+    }
+    printf("\n");
+
+    //  таблица
+    for (i = 0; i < 7; i++)
+    {
+        printf("[%d]", i);
+        for (j = 0; j < 7; j++)
+        {
+            printf("%5d ", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    //Транспортировка элементов массива
+    // Вывод элементов транспортированного массива 
+    for (int i = 0; i < 7; i++)
+    {
+        for (int j = i + 1; j < 7; j++)
+        {
+            p = a[i][j];
+            a[i][j] = a[j][i];
+            a[j][i] = p;
+        }
+        printf("\n");
+    }
+    //  Вывод в виде таблицы с индексами
+    printf("\n\nТаблица транспортированного массива с индексами:\n");
+
+
+
+    for (j = 0; j < 7; j++)
+    {
+        printf("   [%d]", j);
+    }
+    printf("\n");
+
+    //  таблица
+    for (i = 0; i < 7; i++)
+    {
+        printf("[%d]", i);
+        for (j = 0; j < 7; j++)
+        {
+            printf("%3d ", a[i][j]);
+        }
+        printf("\n");
+    }
+
+
+    printf("Вычисление количества ненулевых элементов первой строки массива:\n");
+    printf("Строка :");
+    for (j = 0; j < 7; j++)
+    {
+        printf(" %d", a[0][j]);
+    }
+    printf("\n");
+    printf("Количество нулевых элементов в первой строке: %d\n", nenyle(a));
+
+    printf("Вычисление количества пар одинаковых соседних элементов в строке\n\n\n");
+    printf("Введеите номер строки(от 0 до 6):");
+    scanf("%d", &nomer);
+
+    if (nomer >= 0 && nomer < 7)
+    {
+        printf("Строка:\n");
+        for (j = 0; j < 7; j++)
+        {
+            printf(" %d", a[nomer][j]);
+        }
+        printf("\nКоличества пар одинаковых соседних элементов в строке: %d\n", odin(a, nomer, j));
+    }
+    else
+    {
+        printf("Ошибка:номер строки должен быть от 0 до 6");
+    }
+    printf("Координаты максимального элемента массива: a[%d][%d]", maximum(a, i, j));
+    return 0;
+}
